@@ -22,7 +22,8 @@ jobs:
       - name: Install base tooling
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "torch==2.3.1" "torchvision==0.18.1" "torchaudio==2.3.1" --index-url https://download.pytorch.org/whl/cpu
+          # Лёгкий стек без torchvision (она и даёт nms-ошибку)
+          python -m pip install "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           python -m pip install "huggingface_hub>=0.24.6,<1.0"
 
       - name: Install ltx-core & ltx-pipelines (editable)
@@ -34,15 +35,14 @@ jobs:
             python -m pip install -e "packages/ltx-pipelines"
           fi
 
-      - name: Smoke test imports
+      - name: Smoke test TI2Vid module
         run: |
           python - << 'PY'
           import importlib
 
-          print("Importing ltx_pipelines...")
-          m = importlib.import_module("ltx_pipelines")
-          print("ltx_pipelines imported:", m)
-
+          print("Importing ltx_pipelines.ti2vid_onestage...")
+          m = importlib.import_module("ltx_pipelines.ti2vid_onestage")
+          print("Module imported:", m.__name__)
           PY
 
       - name: CLI --help for ti2vid_onestage
