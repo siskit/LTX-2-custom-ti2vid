@@ -1,20 +1,29 @@
 from __future__ import annotations
 
 """
-TI2Vid-only init for ltx_pipelines.
+LTX-2 Pipelines (TI2Vid-only fork).
 
-Оставляем только то, что реально нужно для TI2Vid пайплайнов и shim-модуля ti2vid_onestage.
-Никаких импортов a2vid / Gemma / audio здесь быть не должно.
+Оставляем только пайплайны, которые реально нужны для TI2Vid и связанных задач.
+Никаких импортов a2vid / audio-пайплайнов отсюда не делаем, чтобы избежать
+тяжёлых зависимостей (Gemma/torchvision) в окружении Modal.
 """
 
-# ЕслиDistilledPipeline действительно нужен для твоего кода – можно оставить.
-# Но для чистого TI2Vid через CLI это не обязательно.
-# from ltx_pipelines.distilled import DistilledPipeline  # noqa: F401
+from ltx_pipelines.distilled import DistilledPipeline
+from ltx_pipelines.ic_lora import ICLoraPipeline
+from ltx_pipelines.keyframe_interpolation import KeyframeInterpolationPipeline
+from ltx_pipelines.retake import RetakePipeline
+from ltx_pipelines.ti2vid_one_stage import TI2VidOneStagePipeline
+from ltx_pipelines.ti2vid_two_stages import TI2VidTwoStagesPipeline
 
-# Обеспечиваем, что подмодуль с CLI существует (мы его уже создали).
+# Shim-модуль для CLI: python -m ltx_pipelines.ti2vid_onestage
 from ltx_pipelines import ti2vid_onestage  # noqa: F401
 
 __all__ = [
-    # "DistilledPipeline",
+    "DistilledPipeline",
+    "ICLoraPipeline",
+    "KeyframeInterpolationPipeline",
+    "RetakePipeline",
+    "TI2VidOneStagePipeline",
+    "TI2VidTwoStagesPipeline",
     "ti2vid_onestage",
 ]
