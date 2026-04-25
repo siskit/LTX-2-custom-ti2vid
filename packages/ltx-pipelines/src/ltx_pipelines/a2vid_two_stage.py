@@ -1,4 +1,3 @@
-raise ImportError("a2vid/audio pipelines are disabled in this TI2Vid-only fork")
 import logging
 from collections.abc import Iterator
 
