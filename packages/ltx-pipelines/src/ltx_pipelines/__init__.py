@@ -20,7 +20,7 @@ from ltx_pipelines.ti2vid_one_stage import TI2VidOneStagePipeline
 from ltx_pipelines.ti2vid_two_stages import TI2VidTwoStagesPipeline
 
 __all__ = [
-    "A2VidPipelineTwoStage",
+    #"A2VidPipelineTwoStage",
     "DistilledPipeline",
     "ICLoraPipeline",
     "KeyframeInterpolationPipeline",
